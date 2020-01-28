@@ -18,17 +18,17 @@
         <div>
           <b-form-checkbox
             id="checkbox-3"
-            v-model="birthdayCardReceived"
+            v-model="sentToSon"
             name="checkbox-3"
-            value="received"
-            unchecked-value="not_received"
+            value="true"
+            unchecked-value="false"
           >
             Have I received my birthday card from Grandpa?
           </b-form-checkbox>
         </div>
       </b-card>
     </div>
-    <SonComponent></SonComponent>
+    <SonComponent :sentToGrandson="sentToGrandson"></SonComponent>
   </div>
 </template>
 
@@ -37,12 +37,22 @@ import SonComponent from "@/components/SonComponent";
 export default {
   data() {
     return {
-      birthdayCardReceived: "not_received",
+      // birthdayCardReceived: "not_received",
       name: "Ed"
     };
   },
   components: {
     SonComponent
+  },
+  props: {
+    sentToSon: {
+      type: Boolean,
+      required: true
+    },
+    sentToGrandson: {
+      type: Boolean,
+      required: true
+    }
   }
 };
 </script>

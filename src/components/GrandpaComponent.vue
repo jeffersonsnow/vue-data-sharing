@@ -26,7 +26,10 @@
         >
       </b-card>
     </div>
-    <DadComponent></DadComponent>
+    <DadComponent
+      :sentToSon="sentToSon"
+      :sentToGrandson="sentToGrandson"
+    ></DadComponent>
   </div>
 </template>
 
@@ -35,14 +38,22 @@ import DadComponent from "@/components/DadComponent";
 
 export default {
   data() {
-    return {};
+    return {
+      sentToSon: false,
+      sentToGrandson: false
+    };
   },
   components: {
     DadComponent
   },
   methods: {
     sendBirthdayCard(child) {
-      console.log(child);
+      if (child === "son") {
+        this.sentToSon = true;
+      }
+      if (child === "grandson") {
+        this.sentToGrandson = true;
+      }
     }
   }
 };

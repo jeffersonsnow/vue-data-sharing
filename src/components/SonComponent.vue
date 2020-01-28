@@ -17,10 +17,10 @@
         <div>
           <b-form-checkbox
             id="checkbox-4"
-            v-model="birthdayCardReceived"
+            v-model="sentToGrandson"
             name="checkbox-4"
-            value="received"
-            unchecked-value="not_received"
+            value="true"
+            unchecked-value="false"
           >
             Have I received my birthday card from Grandpa?
           </b-form-checkbox>
@@ -34,9 +34,15 @@
 export default {
   data() {
     return {
-      name: "Isaac",
-      birthdayCardReceived: "not_received"
+      name: "Isaac"
+      // birthdayCardReceived: "not_received"
     };
+  },
+  props: {
+    sentToGrandson: {
+      type: Boolean,
+      required: true
+    }
   }
 };
 </script>
