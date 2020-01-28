@@ -27,21 +27,21 @@
           </b-form-checkbox>
         </div>
         <div>
-          <b-button variant="success" @click="thanksGrandpa('son', sentToSon)"
+          <b-button
+            variant="success"
+            @click="thanksGrandpa('sonCardDelivered', sentToSon)"
             >Say, "Thanks Grandpa"</b-button
           >
         </div>
       </b-card>
     </div>
-    <SonComponent
-      :sentToGrandson="sentToGrandson"
-      @receivedCard="receivedCard"
-    ></SonComponent>
+    <SonComponent></SonComponent>
   </div>
 </template>
 
 <script>
 import SonComponent from "@/components/SonComponent";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -53,14 +53,14 @@ export default {
     SonComponent
   },
   props: {
-    sentToSon: {
-      type: Boolean,
-      required: true
-    },
-    sentToGrandson: {
-      type: Boolean,
-      required: true
-    }
+    // sentToSon: {
+    //   type: Boolean,
+    //   required: true
+    // },
+    // sentToGrandson: {
+    //   type: Boolean,
+    //   required: true
+    // }
   },
   methods: {
     thanksGrandpa(child, isDelivered) {
@@ -71,11 +71,11 @@ export default {
         child: child,
         isDelivered: isDelivered
       };
-      this.$emit("receivedCard", payload);
-    },
-    receivedCard(payload) {
-      this.thanksGrandpa(payload.child, payload.isDelivered);
+      this.$store.dispatch("cardReceived", payload);
     }
+  },
+  computed: {
+    ...mapGetters(["sentToSon"])
   }
 };
 </script>

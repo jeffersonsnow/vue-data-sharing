@@ -22,13 +22,13 @@
             value="true"
             unchecked-value="false"
           >
-            Have I received my birthday card from Grandpa? {{ receivedCard }}
+            Have I received my birthday card from Grandpa?
           </b-form-checkbox>
         </div>
         <div>
           <b-button
             variant="success"
-            @click="thanksGrandpa('grandson', receivedCard)"
+            @click="thanksGrandpa('grandsonCardDelivered', receivedCard)"
             >Say, "Thanks Grandpa"</b-button
           >
         </div>
@@ -38,12 +38,12 @@
 </template>
 
 <script>
-import { bus } from "../main";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      name: "Isaac",
-      receivedCard: false
+      name: "Isaac"
+      // receivedCard: false
       // birthdayCardReceived: "not_received"
     };
   },
@@ -59,21 +59,12 @@ export default {
         child: child,
         isDelivered: isDelivered
       };
-      bus.$emit("grandsonReceivedCard", payload);
-      // if (!isDelivered) {
-      //   alert("But I did not get a card");
-      // }
-      // const payload = {
-      //   child: child,
-      //   isDelivered: isDelivered
-      // };
-      // this.$emit("receivedCard", payload);
+      this.$store.dispatch("cardReceived", payload);
     }
   },
-  created() {
-    bus.$on("grandpaSentCard", isSent => {
-      this.receivedCard = isSent;
-    });
+  created() {},
+  computed: {
+    ...mapGetters({ receivedCard: "sentToGrandson" })
   }
 };
 </script>

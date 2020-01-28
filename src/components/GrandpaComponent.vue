@@ -54,25 +54,22 @@
         </b-list-group>
       </b-card>
     </div>
-    <DadComponent
-      :sentToSon="sentToSon"
-      :sentToGrandson="sentToGrandson"
-      @receivedCard="confirmBirthdayCardDelivery"
-    ></DadComponent>
+    <DadComponent @receivedCard="confirmBirthdayCardDelivery"></DadComponent>
   </div>
 </template>
 
 <script>
 import DadComponent from "@/components/DadComponent";
 import { bus } from "../main";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
-      sentToSon: false,
-      sentToGrandson: false,
-      sonCardDelivered: false,
-      grandsonCardDelivered: false
+      // sentToSon: false,
+      // sentToGrandson: false,
+      // sonCardDelivered: false,
+      // grandsonCardDelivered: false
     };
   },
   components: {
@@ -81,11 +78,13 @@ export default {
   methods: {
     sendBirthdayCard(child) {
       if (child === "son") {
-        this.sentToSon = true;
+        // this.sentToSon = true;
+        this.$store.dispatch("sendToSon", true);
       }
       if (child === "grandson") {
-        this.sentToGrandson = true;
-        bus.$emit("grandpaSentCard", this.sentToGrandson);
+        // this.sentToGrandson = true;
+        // bus.$emit("grandpaSentCard", this.sentToGrandson);
+        this.$store.dispatch("sendToGrandson", true);
       }
     },
     confirmBirthdayCardDelivery(payload) {
@@ -101,6 +100,14 @@ export default {
     bus.$on("grandsonReceivedCard", payload => {
       this.confirmBirthdayCardDelivery(payload);
     });
+  },
+  computed: {
+    ...mapGetters([
+      "sentToSon",
+      "sentToGrandson",
+      "sonCardDelivered",
+      "grandsonCardDelivered"
+    ])
   }
 };
 </script>
