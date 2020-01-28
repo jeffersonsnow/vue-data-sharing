@@ -64,6 +64,7 @@
 
 <script>
 import DadComponent from "@/components/DadComponent";
+import { bus } from "../main";
 
 export default {
   data() {
@@ -84,6 +85,7 @@ export default {
       }
       if (child === "grandson") {
         this.sentToGrandson = true;
+        bus.$emit("grandpaSentCard", this.sentToGrandson);
       }
     },
     confirmBirthdayCardDelivery(payload) {
@@ -94,6 +96,11 @@ export default {
         this.grandsonCardDelivered = true;
       }
     }
+  },
+  created() {
+    bus.$on("grandsonReceivedCard", payload => {
+      this.confirmBirthdayCardDelivery(payload);
+    });
   }
 };
 </script>

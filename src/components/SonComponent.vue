@@ -17,18 +17,18 @@
         <div>
           <b-form-checkbox
             id="checkbox-4"
-            v-model="sentToGrandson"
+            v-model="receivedCard"
             name="checkbox-4"
             value="true"
             unchecked-value="false"
           >
-            Have I received my birthday card from Grandpa? {{ sentToGrandson }}
+            Have I received my birthday card from Grandpa? {{ receivedCard }}
           </b-form-checkbox>
         </div>
         <div>
           <b-button
             variant="success"
-            @click="thanksGrandpa('grandson', sentToGrandson)"
+            @click="thanksGrandpa('grandson', receivedCard)"
             >Say, "Thanks Grandpa"</b-button
           >
         </div>
@@ -38,30 +38,42 @@
 </template>
 
 <script>
+import { bus } from "../main";
 export default {
   data() {
     return {
-      name: "Isaac"
+      name: "Isaac",
+      receivedCard: false
       // birthdayCardReceived: "not_received"
     };
   },
-  props: {
-    sentToGrandson: {
-      type: Boolean,
-      required: true
-    }
-  },
+  // props: {
+  //   sentToGrandson: {
+  //     type: Boolean,
+  //     required: true
+  //   }
+  // },
   methods: {
     thanksGrandpa(child, isDelivered) {
-      if (!isDelivered) {
-        alert("But I did not get a card");
-      }
       const payload = {
         child: child,
         isDelivered: isDelivered
       };
-      this.$emit("receivedCard", payload);
+      bus.$emit("grandsonReceivedCard", payload);
+      // if (!isDelivered) {
+      //   alert("But I did not get a card");
+      // }
+      // const payload = {
+      //   child: child,
+      //   isDelivered: isDelivered
+      // };
+      // this.$emit("receivedCard", payload);
     }
+  },
+  created() {
+    bus.$on("grandpaSentCard", isSent => {
+      this.receivedCard = isSent;
+    });
   }
 };
 </script>
