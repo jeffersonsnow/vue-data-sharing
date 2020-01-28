@@ -35,10 +35,7 @@ import DadComponent from "@/components/DadComponent";
 
 export default {
   data() {
-    return {
-      sonCardDelivered: "not_delivered",
-      grandsonCardDelivered: "not_delivered"
-    };
+    return {};
   },
   components: {
     DadComponent
