@@ -22,8 +22,15 @@
             value="true"
             unchecked-value="false"
           >
-            Have I received my birthday card from Grandpa?
+            Have I received my birthday card from Grandpa? {{ sentToGrandson }}
           </b-form-checkbox>
+        </div>
+        <div>
+          <b-button
+            variant="success"
+            @click="thanksGrandpa('grandson', sentToGrandson)"
+            >Say, "Thanks Grandpa"</b-button
+          >
         </div>
       </b-card>
     </div>
@@ -42,6 +49,18 @@ export default {
     sentToGrandson: {
       type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    thanksGrandpa(child, isDelivered) {
+      if (!isDelivered) {
+        alert("But I did not get a card");
+      }
+      const payload = {
+        child: child,
+        isDelivered: isDelivered
+      };
+      this.$emit("receivedCard", payload);
     }
   }
 };

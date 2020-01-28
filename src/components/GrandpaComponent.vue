@@ -24,11 +24,40 @@
         <b-button variant="danger" @click="sendBirthdayCard('grandson')"
           >Send Grandson Birthday Card</b-button
         >
+        <b-list-group flush>
+          <b-list-group-item>
+            <div>
+              <b-form-checkbox
+                id="checkbox-1"
+                v-model="sonCardDelivered"
+                name="checkbox-1"
+                value="true"
+                unchecked-value="false"
+              >
+                Has my son received his birthday card?
+              </b-form-checkbox>
+            </div>
+          </b-list-group-item>
+          <b-list-group-item
+            ><div>
+              <b-form-checkbox
+                id="checkbox-2"
+                v-model="grandsonCardDelivered"
+                name="checkbox-2"
+                value="true"
+                unchecked-value="false"
+              >
+                Has my grandson received his birthday card?
+              </b-form-checkbox>
+            </div></b-list-group-item
+          >
+        </b-list-group>
       </b-card>
     </div>
     <DadComponent
       :sentToSon="sentToSon"
       :sentToGrandson="sentToGrandson"
+      @receivedCard="confirmBirthdayCardDelivery"
     ></DadComponent>
   </div>
 </template>
@@ -40,7 +69,9 @@ export default {
   data() {
     return {
       sentToSon: false,
-      sentToGrandson: false
+      sentToGrandson: false,
+      sonCardDelivered: false,
+      grandsonCardDelivered: false
     };
   },
   components: {
@@ -53,6 +84,14 @@ export default {
       }
       if (child === "grandson") {
         this.sentToGrandson = true;
+      }
+    },
+    confirmBirthdayCardDelivery(payload) {
+      if (payload.child === "son") {
+        this.sonCardDelivered = true;
+      }
+      if (payload.child === "grandson") {
+        this.grandsonCardDelivered = true;
       }
     }
   }
