@@ -42,7 +42,9 @@
 <script>
 import SonComponent from "@/components/SonComponent";
 import { mapGetters } from "vuex";
+import { ThankGrandpaService } from "@/mixins/thanksGrandpa";
 export default {
+  mixins: [ThankGrandpaService],
   data() {
     return {
       // birthdayCardReceived: "not_received",
@@ -62,18 +64,7 @@ export default {
     //   required: true
     // }
   },
-  methods: {
-    thanksGrandpa(child, isDelivered) {
-      if (!isDelivered) {
-        alert("But I did not get a card");
-      }
-      const payload = {
-        child: child,
-        isDelivered: isDelivered
-      };
-      this.$store.dispatch("cardReceived", payload);
-    }
-  },
+  methods: {},
   computed: {
     ...mapGetters(["sentToSon"])
   }

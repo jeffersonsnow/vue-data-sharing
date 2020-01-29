@@ -39,6 +39,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { ThankGrandpaService } from "@/mixins/thanksGrandpa";
 export default {
   data() {
     return {
@@ -53,22 +54,12 @@ export default {
   //     required: true
   //   }
   // },
-  methods: {
-    thanksGrandpa(child, isDelivered) {
-      if (!isDelivered) {
-        alert("But I did not get a card");
-      }
-      const payload = {
-        child: child,
-        isDelivered: isDelivered
-      };
-      this.$store.dispatch("cardReceived", payload);
-    }
-  },
+  methods: {},
   created() {},
   computed: {
     ...mapGetters({ receivedCard: "sentToGrandson" })
-  }
+  },
+  mixins: [ThankGrandpaService]
 };
 </script>
 
