@@ -39,7 +39,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { ThankGrandpaService } from "@/mixins/thanksGrandpa";
+import { ThankGrandpaMixin } from "@/mixins/thanksGrandpa";
 export default {
   data() {
     return {
@@ -59,7 +59,7 @@ export default {
   computed: {
     ...mapGetters({ receivedCard: "sentToGrandson" })
   },
-  mixins: [ThankGrandpaService]
+  mixins: [ThankGrandpaMixin]
 };
 </script>
 

@@ -1,4 +1,4 @@
-export const ThankGrandpaService = {
+export const ThankGrandpaMixin = {
   methods: {
     thanksGrandpa(child, isDelivered) {
       if (!isDelivered) {

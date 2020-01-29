@@ -42,9 +42,9 @@
 <script>
 import SonComponent from "@/components/SonComponent";
 import { mapGetters } from "vuex";
-import { ThankGrandpaService } from "@/mixins/thanksGrandpa";
+import { ThankGrandpaMixin } from "@/mixins/thanksGrandpa";
 export default {
-  mixins: [ThankGrandpaService],
+  mixins: [ThankGrandpaMixin],
   data() {
     return {
       // birthdayCardReceived: "not_received",
