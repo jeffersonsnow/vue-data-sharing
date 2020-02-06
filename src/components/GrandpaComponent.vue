@@ -88,10 +88,10 @@ export default {
     },
     confirmBirthdayCardDelivery(payload) {
       if (payload.child === "son") {
-        this.sonCardDelivered = true;
+        this.sonCardDelivered = payload.isDelivered;
       }
       if (payload.child === "grandson") {
-        this.grandsonCardDelivered = true;
+        this.grandsonCardDelivered = payload.isDelivered;
       }
     }
   }
