@@ -3,7 +3,7 @@
     <div>
       <b-card
         title="Grandpa Component"
-        img-src="https://pixy.org/src/454/4549807.png"
+        img-src="https://cdn.clipart.email/cca078a03e43c3a321a269d68e05d7f6_grandpa-clipart_800-1067.png"
         img-alt="Image"
         img-top
         tag="article"
