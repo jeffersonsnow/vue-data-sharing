@@ -15,15 +15,15 @@
         </b-card-text>
 
         <div>
-          <b-form-checkbox
-            id="checkbox-4"
-            v-model="receivedCard"
-            name="checkbox-4"
-            value="true"
-            unchecked-value="false"
-          >
-            Have I received my birthday card from Grandpa? {{ receivedCard }}
-          </b-form-checkbox>
+          <div>
+            Have I received my birthday card from Grandpa?
+          </div>
+          <div v-if="!receivedCard">
+            <b-badge class="button" variant="danger">Not Received</b-badge>
+          </div>
+          <div v-else>
+            <b-badge class="button" variant="success">Received</b-badge>
+          </div>
         </div>
         <div>
           <b-button
@@ -44,7 +44,7 @@ export default {
     return {
       name: "Isaac",
       receivedCard: false
-      // birthdayCardReceived: "not_received"
+      // birthdayCardReceived: false
     };
   },
   // props: {
@@ -55,6 +55,10 @@ export default {
   // },
   methods: {
     thanksGrandpa(child, isDelivered) {
+      if (!isDelivered) {
+        alert("But I did not get a card");
+        return;
+      }
       const payload = {
         child: child,
         isDelivered: isDelivered
