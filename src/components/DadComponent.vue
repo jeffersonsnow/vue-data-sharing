@@ -16,15 +16,15 @@
         </b-card-text>
 
         <div>
-          <b-form-checkbox
-            id="checkbox-3"
-            v-model="birthdayCardReceived"
-            name="checkbox-3"
-            value="received"
-            unchecked-value="not_received"
-          >
+          <div>
             Have I received my birthday card from Grandpa?
-          </b-form-checkbox>
+          </div>
+          <div v-if="!birthdayCardReceived">
+            <b-badge class="button" variant="danger">Not Received</b-badge>
+          </div>
+          <div v-else>
+            <b-badge class="button" variant="success">Received</b-badge>
+          </div>
         </div>
       </b-card>
     </div>
@@ -37,7 +37,7 @@ import SonComponent from "@/components/SonComponent";
 export default {
   data() {
     return {
-      birthdayCardReceived: "not_received",
+      birthdayCardReceived: false,
       name: "Ed"
     };
   },
