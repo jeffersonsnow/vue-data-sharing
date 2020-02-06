@@ -16,15 +16,15 @@
         </b-card-text>
 
         <div>
-          <b-form-checkbox
-            id="checkbox-3"
-            v-model="sentToSon"
-            name="checkbox-3"
-            value="true"
-            unchecked-value="false"
-          >
+          <div>
             Have I received my birthday card from Grandpa?
-          </b-form-checkbox>
+          </div>
+          <div v-if="!sentToSon">
+            <b-badge class="button" variant="danger">Not Received</b-badge>
+          </div>
+          <div v-else>
+            <b-badge class="button" variant="success">Received</b-badge>
+          </div>
         </div>
         <div>
           <b-button
